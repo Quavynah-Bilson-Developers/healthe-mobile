@@ -13,19 +13,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.healthe.R;
+import io.healthe.model.User;
 import io.healthe.util.HealthePrefs;
 import io.healthe.util.Utils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple login {@link Fragment}.
@@ -41,13 +42,10 @@ public class LoginFragment extends Fragment {
 	TextInputEditText password;
 	@BindView(R.id.login)
 	Button login;
-	@BindView(R.id.google_auth)
-	SignInButton googleAuth;
 	
 	private FragmentActivity activity;
 	private MaterialDialog loading;
 	private HealthePrefs prefs;
-	public static final int REQ_AUTH_CODE = 129;
 	
 	public LoginFragment() {
 		// Required empty public constructor
@@ -83,44 +81,47 @@ public class LoginFragment extends Fragment {
 	@OnClick(R.id.login)
 	void doLogin() {
 		if (Utils.hasValidFields(email, true) && Utils.hasValidFields(password, false)) {
-			/*loading.show();
+			loading.show();
 			String em = email.getText().toString();
 			String pwd = password.getText().toString();
-			prefs.getApi().getCurrentUser(em, pwd)
-					.enqueue(new Callback<User>() {
-						@Override
-						public void onResponse(Call<User> call, Response<User> response) {
-							if (response != null && response.isSuccessful()) {
-								loading.dismiss();
-								Utils.showMessage("User created", getContext());
-							} else {
-								loading.dismiss();
-								if (response != null) {
-									Utils.showMessage(response.message(), getContext());
-								}
-							}
-						}
+			
+			//Send data to server for authentication
+			prefs.getApi().loginUser(em, pwd).enqueue(new Callback<User>() {
+				@Override
+				public void onResponse(Call<User> call, Response<User> response) {
+					if (response != null && response.isSuccessful()) {
+						//Returns user as a json object
+						User user = response.body();
+						//Set user login state to be true
+						prefs.setAccessToken(String.valueOf(user.id));
 						
-						@Override
-						public void onFailure(Call<User> call, Throwable t) {
-							loading.dismiss();
-							Utils.showMessage(t.getLocalizedMessage(), getContext());
-						}
-					});*/
-			activity.startActivity(new Intent(activity, HomeActivity.class));
-			activity.finish();
+						//Store user data locally
+						prefs.setLoggedInUser(user);
+						
+						//Dismiss loading dialog
+						loading.dismiss();
+						
+						//Send user to home screen
+						activity.startActivity(new Intent(activity, HomeActivity.class));
+						activity.finish();
+					} else {
+						showMessage(response.message());
+					}
+				}
+				
+				@Override
+				public void onFailure(Call<User> call, Throwable t) {
+					showMessage(t.getLocalizedMessage());
+				}
+			});
 		} else {
 			Utils.showMessage("Please enter the right credentials", getContext());
 		}
 	}
 	
-	@OnClick(R.id.google_auth)
-	void doGoogleAuth() {
-		//Configure the sign in to request user details
-		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-				.requestEmail()
-				.build();
-		GoogleSignInClient apiClient = GoogleSignIn.getClient(activity.getApplicationContext(), gso);
-		startActivityForResult(apiClient.getSignInIntent(), REQ_AUTH_CODE);
+	//Shows the error to the user as a toast message
+	private void showMessage(CharSequence message) {
+		if (loading.isShowing()) loading.dismiss();
+		Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
 	}
 }

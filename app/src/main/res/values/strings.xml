@@ -22,4 +22,7 @@
 	<string name="login">Login</string>
 	<string name="username">Username</string>
 	<string name="loading_text">This will only take a moment</string>
+	<string name="height">Height (in metres)</string>
+	<string name="weight">Weight (in kilograms)</string>
+	<string name="set_date_of_birth">Set date of birth</string>
 </resources>

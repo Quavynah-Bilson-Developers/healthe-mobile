@@ -59,7 +59,8 @@ public class Utils {
 	}
 	
 	//Server url
-	static final String SERVER_IP = "http://10.0.2.2/";
+//	static final String SERVER_IP = "http://10.0.2.2/serwaa/shopping_guide1/api/";
+	static final String SERVER_IP = "http://10.0.2.2:8080/serwaa/shopping_guide1/";
 	
 	//Database tables
 	public static final String USERS = "users";

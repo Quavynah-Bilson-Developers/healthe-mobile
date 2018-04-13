@@ -43,8 +43,8 @@
 		android:id="@+id/login"
 		android:layout_width="130dp"
 		android:layout_height="wrap_content"
-		android:layout_below="@id/password_float_label"
 		android:layout_alignParentEnd="true"
+		android:layout_below="@id/password_float_label"
 		android:layout_marginTop="@dimen/padding_normal"
 		android:background="@drawable/auth_button_bg"
 		android:padding="@dimen/spacing_micro"
@@ -55,8 +55,9 @@
 		android:id="@+id/google_auth"
 		android:layout_width="140dp"
 		android:layout_height="wrap_content"
+		android:layout_alignParentStart="true"
 		android:layout_below="@id/password_float_label"
 		android:layout_marginTop="@dimen/padding_normal"
-		android:layout_alignParentStart="true"/>
+		android:visibility="gone" />
 
 </RelativeLayout>

@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +31,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.healthe.BuildConfig;
 import io.healthe.R;
+import io.healthe.model.User;
 import io.healthe.model.UserQuery;
+import io.healthe.util.HealthePrefs;
 import io.healthe.util.adapter.UserQueryAdapter;
 
 public class HomeActivity extends AppCompatActivity
@@ -55,6 +56,7 @@ public class HomeActivity extends AppCompatActivity
 	SwipeRefreshLayout refreshLayout;
 	
 	private UserQueryAdapter adapter;
+	private HealthePrefs prefs;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,10 @@ public class HomeActivity extends AppCompatActivity
 		setContentView(R.layout.activity_home);
 		//Add data binding call
 		ButterKnife.bind(this);
+		
+		//Init prefs
+		prefs = HealthePrefs.get(this);
+		
 		//Setup toolbar support
 		setSupportActionBar(toolbar);
 		
@@ -101,17 +107,17 @@ public class HomeActivity extends AppCompatActivity
 		if (headerView == null) return;
 		
 		//Retrieve the children in the headerView
-		ImageView profile = headerView.findViewById(R.id.user_profile);
+//		ImageView profile = headerView.findViewById(R.id.user_profile);
 		TextView username = headerView.findViewById(R.id.user_name);
 		TextView email = headerView.findViewById(R.id.user_email);
 		
-		//Nav to profile screen
-		profile.setOnClickListener(v -> {
-			if (drawer.isDrawerOpen(GravityCompat.START)) {
-				drawer.closeDrawer(GravityCompat.START);
-			}
-			startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
-		});
+		User user = prefs.getUser();
+		if (user != null) {
+			//Setup user
+			username.setText(user.name);
+			email.setText(user.email);
+			
+		}
 	}
 	
 	@Override
@@ -162,10 +168,10 @@ public class HomeActivity extends AppCompatActivity
 			case R.id.action_about:
 				startActivity(new Intent(HomeActivity.this, AboutActivity.class));
 				return true;
-			
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 		
-		return super.onOptionsItemSelected(item);
 	}
 	
 	private void doSort(CharSequence text) {

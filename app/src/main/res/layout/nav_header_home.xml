@@ -11,13 +11,13 @@
 	android:paddingRight="@dimen/padding_normal"
 	android:paddingTop="@dimen/padding_normal"
 	android:theme="@style/ThemeOverlay.AppCompat.Dark">
-	
+	<!--
 	<ImageView
 		android:id="@+id/user_profile"
 		android:layout_width="@dimen/avatar_bounds"
 		android:layout_height="@dimen/avatar_bounds"
 		android:paddingTop="@dimen/spacing_normal"
-		app:srcCompat="@drawable/avatar_placeholder" />
+		app:srcCompat="@drawable/avatar_placeholder" />-->
 	
 	<TextView
 		android:id="@+id/user_name"
@@ -25,7 +25,7 @@
 		android:layout_height="wrap_content"
 		android:fontFamily="@font/abeezee"
 		android:paddingTop="@dimen/spacing_normal"
-		android:text="Serwah Ado-Yobo"
+		android:text="Serwah Addo-Yobo"
 		android:textAppearance="@style/TextAppearance.AppCompat.Body1"
 		android:textColor="@color/text_primary_light"
 		android:textSize="18sp" />

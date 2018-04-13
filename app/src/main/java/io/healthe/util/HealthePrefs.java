@@ -23,6 +23,9 @@ public class HealthePrefs {
 	public static final String KEY_ACCESS_TOKEN = "KEY_ACCESS_TOKEN";
 	public static final String KEY_USERNAME = "KEY_USERNAME";
 	public static final String KEY_EMAIL = "KEY_EMAIL";
+	private static final String KEY_WEIGHT = "KEY_WEIGHT";
+	private static final String KEY_HEIGHT = "KEY_HEIGHT";
+	private static final String KEY_DOB = "KEY_DOB";
 	
 	private HealtheService api;
 	private Context context;
@@ -38,6 +41,13 @@ public class HealthePrefs {
 	private String username;
 	@Nullable
 	private String email;
+	@Nullable
+	private String weight;
+	@Nullable
+	private String height;
+	@Nullable
+	private String dob;
+	
 	
 	public static HealthePrefs get(Context context) {
 		if (singleton == null) {
@@ -65,6 +75,9 @@ public class HealthePrefs {
 			id = prefs.getLong(KEY_USER_ID, 0L);
 			username = prefs.getString(KEY_USERNAME, null);
 			email = prefs.getString(KEY_EMAIL, null);
+			weight = prefs.getString(KEY_WEIGHT, null);
+			height = prefs.getString(KEY_HEIGHT, null);
+			dob = prefs.getString(KEY_DOB, null);
 		}
 	}
 	
@@ -94,12 +107,18 @@ public class HealthePrefs {
 	public void setLoggedInUser(User user) {
 		if (user != null) {
 			id = user.id;
-			username = user.username;
+			username = user.name;
 			email = user.email;
+			weight = user.weight;
+			height = user.height;
+			dob = user.dob;
 			SharedPreferences.Editor editor = prefs.edit();
 			editor.putLong(KEY_USER_ID, id);
 			editor.putString(KEY_USERNAME, username);
 			editor.putString(KEY_EMAIL, email);
+			editor.putString(KEY_DOB, dob);
+			editor.putString(KEY_HEIGHT, height);
+			editor.putString(KEY_WEIGHT, weight);
 			editor.apply();
 		}
 	}
@@ -110,10 +129,16 @@ public class HealthePrefs {
 		id = 0L;
 		username = null;
 		email = null;
+		dob = null;
+		height = null;
+		weight = null;
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putLong(KEY_USER_ID, id);
 		editor.putString(KEY_USERNAME, username);
 		editor.putString(KEY_EMAIL, email);
+		editor.putString(KEY_DOB, dob);
+		editor.putString(KEY_HEIGHT, height);
+		editor.putString(KEY_WEIGHT, weight);
 		editor.apply();
 		createApi();
 	}
@@ -126,12 +151,29 @@ public class HealthePrefs {
 		return id;
 	}
 	
+	@Nullable
 	public String getUserName() {
 		return username;
 	}
 	
+	@Nullable
 	public String getEmail() {
 		return email;
+	}
+	
+	@Nullable
+	public String getWeight() {
+		return weight;
+	}
+	
+	@Nullable
+	public String getHeight() {
+		return height;
+	}
+	
+	@Nullable
+	public String getDob() {
+		return dob;
 	}
 	
 	public User getUser() {
@@ -139,6 +181,9 @@ public class HealthePrefs {
 				.setEmail(email)
 				.setUsername(username)
 				.setPassword(accessToken)
+				.setDob(dob)
+				.setHeight(height)
+				.setWeight(weight)
 				.build();
 	}
 }
