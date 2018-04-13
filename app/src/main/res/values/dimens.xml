@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2015 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<resources>
+
+    <!-- standard metrics -->
+    <dimen name="spacing_normal">8dp</dimen>
+    <dimen name="spacing_micro">4dp</dimen>
+	<dimen name="padding_normal">16dp</dimen>
+	<!-- padding_normal + fab_size + padding_normal -->
+	<!-- fab_size + padding_normal -->
+	<!-- (fab_size / 2) + padding_normal -->
+	<!-- 2 * ?android:actionBarSize -->
+    <!-- text input layout seems to add 4dp of extra padding. The following account for this -->
+	
+	
+	<!-- dialogs -->
+    <dimen name="padding_dialog">24dp</dimen>
+	
+	<!-- drawer -->
+	
+	<!-- grid -->
+	<!-- 24dp icon + 2 * @dimen/spacing_normal -->
+
+    <!-- designer news story -->
+	
+	<!-- dribbble shot -->
+	<!-- 3 * ?android:actionBarSize -->
+    <!-- avatar should be a 40dp asset in a 48dp touch target & optically aligned with standard padding -->
+    <dimen name="avatar_size">40dp</dimen>
+    <dimen name="avatar_bounds">96dp</dimen>
+	<!-- (avatar_bounds - avatar_size) / 2 -->
+	<!-- padding_normal - avatar_padding -->
+	<!-- avatar_size / 2 -->
+	
+	<!-- dribbble player -->
+	<!-- 2 * actionBarSize - 2 * avatar_padding -->
+	<!-- large_avatar_margin + large_avatar_size + avatar_margin -->
+
+    <!-- bottom sheet -->
+	
+	<!-- about screen -->
+	
+	<!-- Z-axis elevations -->
+	<dimen name="nav_header_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    
+    <!-- per https://developer.android.com/reference/android/view/ViewGroup.LayoutParams.html#MATCH_PARENT -->
+
+</resources>

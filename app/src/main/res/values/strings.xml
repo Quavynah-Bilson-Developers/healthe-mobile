@@ -1,0 +1,25 @@
+<resources>
+	<string name="app_name">Healthe</string>
+	
+	<string name="search">Search</string>
+	<string name="sort">Sort</string>
+	<string name="profile">Profile</string>
+	<string name="help"><![CDATA[Help & Support]]></string>
+	<string name="about_us">About Us</string>
+	<string name="options">Options</string>
+	<string name="share_app">Share App</string>
+	<string name="feedback">Feedback</string>
+	<string name="app_desc">…your secret to a healthy lifestyle</string>
+	<string name="sort_text">Sort by…</string>
+	<string name="sign_up">Join Us</string>
+	<string name="sign_in">Login</string>
+	
+	<!-- TODO: Remove or change this placeholder text -->
+	<string name="hello_blank_fragment">Hello blank fragment</string>
+	<string name="password">Password</string>
+	<string name="get_started">Get Started</string>
+	<string name="email_address">Email address</string>
+	<string name="login">Login</string>
+	<string name="username">Username</string>
+	<string name="loading_text">This will only take a moment</string>
+</resources>

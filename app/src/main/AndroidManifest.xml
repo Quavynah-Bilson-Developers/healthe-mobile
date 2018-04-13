@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="io.healthe"
+	android:installLocation="auto">
+	
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	
+	<application
+		android:name=".util.HealtheApp"
+		android:allowBackup="true"
+		android:appCategory="productivity"
+		android:extractNativeLibs="false"
+		android:icon="@mipmap/ic_launcher"
+		android:label="@string/app_name"
+		android:roundIcon="@mipmap/ic_launcher_round"
+		android:supportsRtl="true"
+		android:theme="@style/AppTheme">
+		<activity
+			android:name=".ui.HomeActivity"
+			android:exported="true"
+			android:label="@string/app_name"
+			android:theme="@style/AppTheme.Home" />
+		<activity
+			android:name=".ui.SplashActivity"
+			android:screenOrientation="sensorPortrait"
+			android:theme="@style/AppTheme.Splash" />
+		
+		<activity-alias
+			android:name=".Launcher"
+			android:label="@string/app_name"
+			android:targetActivity=".ui.SplashActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity-alias>
+		
+		<activity android:name=".ui.AuthActivity" />
+		<activity android:name=".ui.ScanImageActivity" />
+		<activity android:name=".ui.ProfileActivity" />
+		<activity android:name=".ui.AboutActivity" />
+		<activity android:name=".ui.SearchActivity"></activity>
+	</application>
+
+</manifest>
